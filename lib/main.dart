@@ -89,7 +89,7 @@ class _TelaMediaState extends State<TelaMedia> {
     });
   }
 @override
-  void dispose() {
+  void dispose() { //executa limpeza dos recursos que não serão mais utilizados quando um componente é encerrado.
     nota1.dispose();
     nota2.dispose();
     nota3.dispose();
