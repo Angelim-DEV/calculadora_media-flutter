@@ -36,7 +36,7 @@ class _TelaMediaState extends State<TelaMedia> {
 
   void calcularMedia() {
     if (nota1.text.isEmpty || nota2.text.isEmpty || nota3.text.isEmpty) {
-       ScaffoldMessenger.of(context).showSnackBar(
+       ScaffoldMessenger.of(context).showSnackBar( //mensagem de erro aparece na parte inferior do site, sem popup
         const SnackBar(
           content: Text('Preencha todas as notas!'),
         ),
@@ -46,12 +46,12 @@ class _TelaMediaState extends State<TelaMedia> {
     }
 
     double n1 = double.parse(nota1.text.replaceAll(',', '.'));
-    double n2 = double.parse(nota1.text.replaceAll(',', '.'));
-    double n3 = double.parse(nota1.text.replaceAll(',', '.'));
-    double n4 = double.parse(nota1.text.replaceAll(',', '.'));
+    double n2 = double.parse(nota2.text.replaceAll(',', '.'));
+    double n3 = double.parse(nota3.text.replaceAll(',', '.'));
+    double n4 = double.parse(nota4.text.replaceAll(',', '.'));
 
      if (n1 < 0 || n1 > 10 || n2 < 0 || n2 > 10 || n3 < 0 || n3 > 10 || n4 < 0 || n4 > 10) {
-      ScaffoldMessenger.of(context).showSnackBar(
+      ScaffoldMessenger.of(context).showSnackBar( //mensagem de erro aparece na parte inferior do site, sem popup
         const SnackBar(
           content: Text('As notas devem estar entre 0 e 10!'),
         ),
@@ -60,12 +60,14 @@ class _TelaMediaState extends State<TelaMedia> {
       return;
     }
 
-    double valorMedia = (n1 + n2 + n3 + n4) / 4;  //lógica de classificação de notas = NA, I, R, B, MB
-    if (valorMedia<5){
+    double valorMedia = (n1 + n2 + n3 + n4) / 4;  //calculo de média
+
+    //lógica de classificação de notas = NA, I, R, B, MB
+    if (valorMedia < 5){
       resultado = 'I';
       mensagem = 'Você ficou com I. Resultado insuficiente!';
     }
-    else if(valorMedia == 5){
+    else if(valorMedia >= 5 && valorMedia <6){
       resultado = 'R';
       mensagem = 'Você ficou com R. Precisa estudar muito!';
     }
@@ -96,13 +98,13 @@ class _TelaMediaState extends State<TelaMedia> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) { //construção do header do projeto
     return Scaffold(
       appBar: AppBar(
         title: const Text('Calculadora de Média'),
         backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
-        centerTitle: true,
+        centerTitle: true, //centralização do título da calculadora
       ),
 
       body: Padding(
@@ -113,7 +115,7 @@ class _TelaMediaState extends State<TelaMedia> {
             children: [
 
               const Text(
-                'Digite as quatro notas do aluno:',
+                'Digite as quatro notas do aluno:', //pequeno texto abaixo do header solicitando digitação das notas
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -122,13 +124,13 @@ class _TelaMediaState extends State<TelaMedia> {
 
               const SizedBox(height: 20),
 
-              // Primeiro campo
+              // Primeiro campo (nota 1)
               TextField(
-                controller: nota1,
-                keyboardType: const TextInputType.numberWithOptions(decimal: true),
-                decoration: const InputDecoration(
-                  labelText: 'Primeira nota',
-                  border: OutlineInputBorder(),
+                controller: nota1, //variável que será escrita
+                keyboardType: const TextInputType.numberWithOptions(decimal: true), //permite números decimais
+                decoration: const InputDecoration( //decoração do campo de texto, com animação dinámica como de formulários do google
+                  labelText: 'Primeira nota', //texto que está inserido dentro do campo (para informar o ujsuário oq digitar)
+                  border: OutlineInputBorder(), // cria borda em torno do campo
                 ),
               ),
 
@@ -172,14 +174,14 @@ class _TelaMediaState extends State<TelaMedia> {
 
               // Botão para calcular
               ElevatedButton(
-                onPressed: calcularMedia,
-                child: const Text('Calcular Média'),
+                onPressed: calcularMedia, //chamada de função
+                child: const Text('Calcular Média'), //textro informado no botão
               ),
 
               const SizedBox(height: 30),
 
               // Exibição do resultado
-              Text(
+              Text( //estilização
                 'Média: ${media.toStringAsFixed(2)}',
                 style: const TextStyle(
                   fontSize: 22,
