@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Calculadora de Média',
+      title: 'Calculadora de Média', 
       home: const TelaMedia(),
     );
   }
@@ -60,15 +60,18 @@ class _TelaMediaState extends State<TelaMedia> {
       return;
     }
 
-    double valorMedia = (n1 + n2 + n3 + n4) / 4;
-
-    if (valorMedia <= 5){
+    double valorMedia = (n1 + n2 + n3 + n4) / 4;  //lógica de classificação de notas = NA, I, R, B, MB
+    if (valorMedia<5){
+      resultado = 'I';
+      mensagem = 'Você ficou com I. Resultado insuficiente!';
+    }
+    else if(valorMedia == 5){
       resultado = 'R';
       mensagem = 'Você ficou com R. Precisa estudar muito!';
     }
     else if(valorMedia >= 6 && valorMedia <=8){
       resultado = 'B';
-      mensagem = 'Você ficou com B. Você mandou bem!';
+      mensagem = 'Você ficou com B. Precisa estudar um pouco mais!';
     }
     else if (valorMedia >= 9 && valorMedia <= 10) {
       resultado = 'MB';
